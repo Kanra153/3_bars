@@ -10,30 +10,30 @@ def load_data(file_path):
     return parsed_json
 
 
-def get_biggest_bar(data):
+def get_biggest_bar(parsed_json):
     bars = parsed_json['features']
     bar_attributes = []
     for bar in bars:
         bar_attributes.append(bar['properties']['Attributes'])
     biggest_bar = max(bar_attributes, key=lambda x: x['SeatsCount'])
-    return(biggest_bar['Name'])
+    return biggest_bar['Name']
 
 
-def get_smallest_bar(data):
+def get_smallest_bar(parsed_json):
     bars = parsed_json['features']
     bar_attributes = []
     for bar in bars:
         bar_attributes.append(bar['properties']['Attributes'])
     smallest_bar = min(bar_attributes, key=lambda x: x['SeatsCount'])
-    return(smallest_bar['Name'])
+    return smallest_bar['Name']
 
 
-def get_closest_bar(data, longitude, latitude):
+def get_closest_bar(parsed_json, longitude, latitude):
     bars = parsed_json['features']
     closest_bar = min(bars, key=lambda x: sqrt(
-        (x['geometry']['coordinates'][0] - longitude)**2 + 
+        (x['geometry']['coordinates'][0] - longitude)**2 +
         (x['geometry']['coordinates'][1]-latitude)**2))
-    return(closest_bar['properties']['Attributes']['Name'])
+    return closest_bar['properties']['Attributes']['Name']
 
 
 if __name__ == '__main__':
