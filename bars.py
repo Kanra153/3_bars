@@ -2,7 +2,6 @@ import json
 import os
 import sys
 from math import sqrt
-from math import pow
 
 
 def load_data(file_path):
@@ -13,27 +12,39 @@ def load_data(file_path):
 
 def get_biggest_bar(data):
     bars = parsed_json['features']
-    seats = []
+    bar_attributes = []
     for bar in bars:
-        seats.append(bar['properties']['Attributes']['SeatsCount'])
-    biggest_seats = max(seats)
-    for bar in bars:
-        if bar['properties']['Attributes']['SeatsCount'] == biggest_seats: #TODO: Сделать с помощью min()/max()
-            biggest_bar = bar
-    return(biggest_bar['properties']['Attributes']['Name'])
-
+        bar_attributes.append(bar['properties']['Attributes'])
+    biggest_bar = max(bar_attributes, key=lambda x: x['SeatsCount'])
+    return(biggest_bar['Name'])
 
 
 def get_smallest_bar(data):
-    pass
+    bars = parsed_json['features']
+    bar_attributes = []
+    for bar in bars:
+        bar_attributes.append(bar['properties']['Attributes'])
+    smallest_bar = min(bar_attributes, key=lambda x: x['SeatsCount'])
+    return(smallest_bar['Name'])
 
 
 def get_closest_bar(data, longitude, latitude):
-    pass
+    bars = parsed_json['features']
+    closest_bar = min(bars, key=lambda x: sqrt(
+        (x['geometry']['coordinates'][0] - longitude)**2 + 
+        (x['geometry']['coordinates'][1]-latitude)**2))
+    return(closest_bar['properties']['Attributes']['Name'])
 
 
 if __name__ == '__main__':
     file_path = sys.argv[1]
     if os.path.exists(file_path):
         parsed_json = load_data(file_path)
-        get_biggest_bar(parsed_json)
+        longtitude = float(input("Please, input longtitude:"))
+        latitude = float(input("Please, input latitude:"))
+        print("The biggest bar is:",  get_biggest_bar(parsed_json))
+        print("The smallest bar is:", get_smallest_bar(parsed_json))
+        print("The closest bar to you is:",
+              get_closest_bar(parsed_json, longtitude, latitude))
+    else:
+        print('File is not found!')
