@@ -1,22 +1,25 @@
-# Ближайшие бары
+# Closest bars
+The script will show you the name of the biggest bar, the smallest bar and the name of the closest bar to you.
 
-[FIXME. Здесь будет описание проекта]
 
-# Как запустить
+# How to use
 
-Скрипт требует для своей работы установленного интерпретатора Python версии 3.5
+You need Python 3.5 or higher to launch script
 
-Запуск на Linux:
+Launch on Linux:
 
 ```bash
 
-$ python bars.py # possibly requires call of python3 executive instead of just python
-# FIXME вывести пример ответа скрипта
+$ python bars.py path/to/file # possibly requires call of python3 executive instead of just python
+Please, input longtitude:30
+Please, input latitude:50
+The biggest bar is: Спорт бар <Красная машина>
+The smallest bar is: БАР. СОКИ
+The closest bar to you is: Staropramen
 
 ```
 
-Запуск на Windows происходит аналогично.
 
-# Цели проекта
+# Project goals
 
-Код создан в учебных целях. В рамках учебного курса по веб-разработке - [DEVMAN.org](https://devman.org)
+The code is written for educational purposes. Training course for web-developers - DEVMAN.org
