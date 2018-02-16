@@ -12,46 +12,66 @@ def load_data(file_path):
     return parsed_json
 
 
-def get_biggest_bar(bar_attributes):
-    biggest_bar = max(bar_attributes, key=lambda x: x['SeatsCount'])
+def get_biggest_bar(parsed_json):
+    biggest_bar = max(parsed_json['features'],
+                      key=lambda x:
+                      x['properties']['Attributes']['SeatsCount'])
     return biggest_bar
 
 
-def get_smallest_bar(bar_attributes):
-    smallest_bar = min(bar_attributes, key=lambda x: x['SeatsCount'])
+def get_smallest_bar(parsed_json):
+    smallest_bar = min(parsed_json['features'],
+                       key=lambda x: 
+                       x['properties']['Attributes']['SeatsCount'])
     return smallest_bar
 
 
-def get_closest_bar(bars, longitude, latitude):
-    closest_bar = min(bars, key=lambda x: sqrt(
-        (x['geometry']['coordinates'][0] - longitude)**2 +
-        (x['geometry']['coordinates'][1]-latitude)**2))
+def get_closest_bar(parsed_json, longitude, latitude):
+    closest_bar = min(parsed_json['features'], key=lambda x: sqrt(
+                     (x['geometry']['coordinates'][0] - longitude)**2 +
+                     (x['geometry']['coordinates'][1]-latitude)**2))
     return closest_bar
 
 
 if __name__ == '__main__':
-    if len(sys.argv) > 1:
+    if len(sys.argv) < 2:
+        print('File is not found!')
+    else:
         file_path = sys.argv[1]
         parsed_json = load_data(file_path)
-        bars = parsed_json['features']
-        bar_attributes = []
-        for bar in bars:
-            bar_attributes.append(bar['properties']['Attributes'])
         try:
-            longtitude = float(input("Please, input longtitude:"))
+            longitude = float(input("Please, input longitude:"))
             latitude = float(input("Please, input latitude:"))
         except ValueError:
-            print("Restart the script using \
+            sys.exit("Restart the script using \
             correct format of your coordinates")
-            sys.exit()
+        biggest_bar = get_biggest_bar(parsed_json)
         print("The biggest bar is:", '\n',
-              json.dumps(get_biggest_bar(bar_attributes),
-              ensure_ascii=False, indent=3))
+              "Name: {}"
+              .format(biggest_bar['properties']['Attributes']['Name']), '\n',
+              "Number of seats: {}"
+              .format(biggest_bar['properties']['Attributes']['SeatsCount']),
+              '\n',
+              "Coordinates: {}, {}"
+              .format(biggest_bar['geometry']['coordinates'][0],
+                      biggest_bar['geometry']['coordinates'][1]))
+        smallest_bar = get_smallest_bar(parsed_json)
         print("The smallest bar is:", '\n',
-              json.dumps(get_smallest_bar(bar_attributes),
-              ensure_ascii=False, indent=3))
-        print("The closest bar to you is:", '\n',
-              json.dumps(get_closest_bar(bars, longtitude, latitude),
-              ensure_ascii=False, indent=3))
-    else:
-        print('File is not found!')
+              "Name: {}"
+              .format(smallest_bar['properties']['Attributes']['Name']), '\n',
+              "Number of seats: {}"
+              .format(smallest_bar['properties']['Attributes']['SeatsCount']),
+              '\n',
+              "Coordinates: {}, {}"
+              .format(smallest_bar['geometry']['coordinates'][0],
+                      smallest_bar['geometry']['coordinates'][1]))
+        closest_bar = get_closest_bar(parsed_json, longitude, latitude)
+        print("The closest bar is:", '\n',
+              "Name: {}"
+              .format(closest_bar['properties']['Attributes']['Name']), '\n',
+              "Number of seats: {}"
+              .format(closest_bar['properties']['Attributes']['SeatsCount']),
+              '\n',
+              "Coordinates: {}, {}"
+              .format(closest_bar['geometry']['coordinates'][0],
+                      closest_bar['geometry']['coordinates'][1]))
