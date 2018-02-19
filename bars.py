@@ -19,13 +19,15 @@ def get_bars_info(parsed_json):
 
 def get_biggest_bar(bars_info):
     biggest_bar = max(bars_info,
-        key=lambda x: x['properties']['Attributes']['SeatsCount'])
+                      key=lambda x:
+                      x['properties']['Attributes']['SeatsCount'])
     return biggest_bar
 
 
 def get_smallest_bar(bars_info):
     smallest_bar = min(bars_info,
-        key=lambda x: x['properties']['Attributes']['SeatsCount'])
+                       key=lambda x: 
+                       x['properties']['Attributes']['SeatsCount'])
     return smallest_bar
 
 
@@ -56,8 +58,7 @@ if __name__ == '__main__':
           .format(biggest_bar['properties']['Attributes']['SeatsCount']), '\n',
           "Coordinates: {}, {}"
           .format(biggest_bar['geometry']['coordinates'][0],
-          biggest_bar['geometry']['coordinates'][1])
-         )
+                  biggest_bar['geometry']['coordinates'][1]))
     smallest_bar = get_smallest_bar(get_bars_info(parsed_json))
     print("The smallest bar is:", '\n',
           "Name: {}"
@@ -67,10 +68,9 @@ if __name__ == '__main__':
           '\n',
           "Coordinates: {}, {}"
           .format(smallest_bar['geometry']['coordinates'][0],
-          smallest_bar['geometry']['coordinates'][1])
-         )
+                  smallest_bar['geometry']['coordinates'][1]))
     closest_bar = get_closest_bar(get_bars_info(parsed_json),
-        longitude, latitude)
+                                  longitude, latitude)
     print("The closest bar is:", '\n',
           "Name: {}"
           .format(closest_bar['properties']['Attributes']['Name']), '\n',
@@ -79,6 +79,4 @@ if __name__ == '__main__':
           '\n',
           "Coordinates: {}, {}"
           .format(closest_bar['geometry']['coordinates'][0],
-          closest_bar['geometry']['coordinates'][1])
-         )
-
+                  closest_bar['geometry']['coordinates'][1]))
