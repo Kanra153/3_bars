@@ -10,25 +10,21 @@ Launch on Linux:
 ```bash
 
 $ python bars.py path/to/file # possibly requires call of python3 executive instead of just python
-Please, input longtitude:30
-Please, input latitude:50
+Please, input longitude:20
+Please, input latitude:40
 The biggest bar is:
- {
-   "global_id": 169375059,
-   "Name": "Спорт бар «Красная машина»",
-   "IsNetObject": "нет",
-   "OperatingCompany": null,
-   "AdmArea": "Южный административный округ",
-   "District": "Даниловский район",
-   "Address": "Автозаводская улица, дом 23, строение 1",
-   "PublicPhone": [
-      {
-         "PublicPhone": "(905) 795-15-84"
-      }
-   ],
-   "SeatsCount": 450,
-   "SocialPrivileges": "нет"
-}
+ Name: Спорт бар «Красная машина»
+ Number of seats: 450
+ Coordinates: 37.638228501070095, 55.70111462948684
+The smallest bar is:
+ Name: БАР. СОКИ
+ Number of seats: 0
+ Coordinates: 37.35805920566864, 55.84614475898795
+The closest bar is:
+ Name: Staropramen
+ Number of seats: 50
+ Coordinates: 36.900000000253, 55.303299999814
+
 
 ```
 
