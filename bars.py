@@ -50,32 +50,35 @@ if __name__ == '__main__':
             correct format of your coordinates")
     biggest_bar = get_biggest_bar(get_bars_info(parsed_json))
     print("The biggest bar is:", '\n',
-        "Name: {}"
-        .format(biggest_bar['properties']['Attributes']['Name']), '\n',
-        "Number of seats: {}"
-        .format(biggest_bar['properties']['Attributes']['SeatsCount']), '\n',
-        "Coordinates: {}, {}"
-        .format(biggest_bar['geometry']['coordinates'][0],
-         biggest_bar['geometry']['coordinates'][1])
+          "Name: {}"
+          .format(biggest_bar['properties']['Attributes']['Name']), '\n',
+          "Number of seats: {}"
+          .format(biggest_bar['properties']['Attributes']['SeatsCount']), '\n',
+          "Coordinates: {}, {}"
+          .format(biggest_bar['geometry']['coordinates'][0],
+          biggest_bar['geometry']['coordinates'][1])
          )
     smallest_bar = get_smallest_bar(get_bars_info(parsed_json))
     print("The smallest bar is:", '\n',
-        "Name: {}"
-        .format(smallest_bar['properties']['Attributes']['Name']), '\n',
-        "Number of seats: {}"
-        .format(smallest_bar['properties']['Attributes']['SeatsCount']), '\n',
-        "Coordinates: {}, {}"
-        .format(smallest_bar['geometry']['coordinates'][0],
-        smallest_bar['geometry']['coordinates'][1])
-        )
+          "Name: {}"
+          .format(smallest_bar['properties']['Attributes']['Name']), '\n',
+          "Number of seats: {}"
+          .format(smallest_bar['properties']['Attributes']['SeatsCount']),
+          '\n',
+          "Coordinates: {}, {}"
+          .format(smallest_bar['geometry']['coordinates'][0],
+          smallest_bar['geometry']['coordinates'][1])
+         )
     closest_bar = get_closest_bar(get_bars_info(parsed_json),
         longitude, latitude)
     print("The closest bar is:", '\n',
-        "Name: {}"
-        .format(closest_bar['properties']['Attributes']['Name']), '\n',
-        "Number of seats: {}"
-        .format(closest_bar['properties']['Attributes']['SeatsCount']), '\n',
-        "Coordinates: {}, {}"
-        .format(closest_bar['geometry']['coordinates'][0],
-        closest_bar['geometry']['coordinates'][1])
-        )
+          "Name: {}"
+          .format(closest_bar['properties']['Attributes']['Name']), '\n',
+          "Number of seats: {}"
+          .format(closest_bar['properties']['Attributes']['SeatsCount']),
+          '\n',
+          "Coordinates: {}, {}"
+          .format(closest_bar['geometry']['coordinates'][0],
+          closest_bar['geometry']['coordinates'][1])
+         )
+
