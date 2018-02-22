@@ -12,30 +12,30 @@ def load_data(file_path):
     return parsed_json
 
 
-def get_bars_info(parsed_json):
-    bars_info = parsed_json['features']
-    return bars_info
+# def get_bars_info(parsed_json):
+#     bars_info = parsed_json['features']
+#     return bars_info
 
 
-def get_biggest_bar(bars_info):
+def get_biggest_bar(parsed_json):
     biggest_bar = max(
-        bars_info, key=lambda x:
+        parsed_json['features'], key=lambda x:
         x['properties']['Attributes']['SeatsCount']
     )
     return biggest_bar
 
 
-def get_smallest_bar(bars_info):
+def get_smallest_bar(parsed_json):
     smallest_bar = min(
-        bars_info, key=lambda x:
+        parsed_json['features'], key=lambda x:
         x['properties']['Attributes']['SeatsCount']
     )
     return smallest_bar
 
 
-def get_closest_bar(bars_info, longitude, latitude):
+def get_closest_bar(parsed_json, longitude, latitude):
     closest_bar = min(
-        bars_info, key=lambda x: sqrt(
+        parsed_json['features'], key=lambda x: sqrt(
         (x['geometry']['coordinates'][0] - longitude)**2 +
         (x['geometry']['coordinates'][1]-latitude)**2)
      )
@@ -61,15 +61,15 @@ if __name__ == '__main__':
         longitude = float(input("Please, input longitude:"))
         latitude = float(input("Please, input latitude:"))
     except ValueError:
-        sys.exit("Restart the script using "
-            "correct format of your coordinates")
-    biggest_bar = get_biggest_bar(get_bars_info(parsed_json))
-    smallest_bar = get_smallest_bar(get_bars_info(parsed_json))
-    closest_bar = get_closest_bar(get_bars_info(parsed_json),
-                                  longitude, latitude)
+        sys.exit("Restart the script using"
+                 "correct format of your coordinates")
+    biggest_bar = get_biggest_bar(parsed_json)
+    smallest_bar = get_smallest_bar(parsed_json)
+    closest_bar = get_closest_bar(parsed_json, longitude, latitude)
     print("The biggest bar is:")
     output_bars_to_console(biggest_bar)
     print("The smallest bar is:")
     output_bars_to_console(smallest_bar)
     print("The closest bar is:")
     output_bars_to_console(closest_bar)
+
